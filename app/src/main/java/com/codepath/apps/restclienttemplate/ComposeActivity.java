@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -27,7 +30,7 @@ public class ComposeActivity extends AppCompatActivity {
     Button btnTweet;
 
     TwitterClient client;
-
+    TextView tvDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,28 @@ public class ComposeActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
 
         etCompose = findViewById(R.id.etCompose);
+
+        etCompose.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // Fires right as the text is being changed (even supplies the range of text)
+                tvDisplay.setText(s.toString().length()+"/"+ MAX_TWEET_LENGTH);
+
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start,  int count,
+                                          int after) {
+                // Fires right before text is changing
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Fires right after the text has changed
+
+            }
+        });
+
         btnTweet = findViewById(R.id.btnTweet);
 
         // click listener on button
