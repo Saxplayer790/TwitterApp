@@ -40,7 +40,7 @@ public class ComposeActivity extends AppCompatActivity {
         client = TwitterApp.getRestClient(this);
 
         etCompose = findViewById(R.id.etCompose);
-
+        tvDisplay = findViewById(R.id.tvDisplay);
         etCompose.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
